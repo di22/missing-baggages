@@ -1,10 +1,10 @@
 <section class="content">
     @for (content of bagsContents.controls; let idx = $index; track content) {
-        <div class="d-flex flex-row">
+        <div class="d-flex flex-row" data-testid="item">
             <app-field-control type="text" [control]="bagsContents.controls[idx].get('contentName')" [label]="'Baggage Content' + (idx + 1)"></app-field-control>
             <app-field-control class="price" type="number" [control]="bagsContents.controls[idx].get('quantity')" label="Quantity"></app-field-control>
             <app-field-control class="m-e-2 quantity" type="number" [control]="bagsContents.controls[idx].get('price')" label="Price"></app-field-control>
-            <button mat-icon-button (click)="removeBaggageContentAndQuantity(idx)" title="Add baggages content and quantity">
+            <button mat-icon-button data-testid="remove-content" (click)="removeBaggageContentAndQuantity(idx)" title="Add baggages content and quantity">
                 <mat-icon>remove</mat-icon>
             </button>
         </div>

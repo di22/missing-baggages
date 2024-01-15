@@ -1,6 +1,6 @@
 <mat-form-field class="w-100">
     <mat-label>{{label}}</mat-label>
-    <input matInput [matDatepicker]="dp" [formControl]="_control">
+    <input matInput [id]="id" [matDatepicker]="dp" [formControl]="_control">
     <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
     <mat-datepicker #dp disabled="false"></mat-datepicker>
 </mat-form-field>

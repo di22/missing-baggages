@@ -4,7 +4,8 @@
            [placeholder]="placeholder"
            matInput
            [formControl]="_control"
-           [matAutocomplete]="auto">
+           [matAutocomplete]="auto"
+           [id]="id">
     <mat-autocomplete #auto="matAutocomplete">
       @for (option of (list | async); track option) {
         <mat-option [value]="option" (onSelectionChange)="onSelect(option)">{{option}}</mat-option>
