@@ -1,0 +1,16 @@
+@switch (type) {
+    @case ('text') {
+        <app-input-control type="text" [control]="_control" [label]="label"></app-input-control>
+    }
+    @case ("number") {
+        <app-number-control class="m-e-2 w-10" [control]="_control" [label]="label"></app-number-control>
+    }
+    @case ("date") {
+        <app-date-control class="m-x-1" [control]="_control" [label]="label"></app-date-control>
+    }
+    @case ("autocomplete") {
+        <app-auto-complete [control]="_control" [label]="label" [list]="list" (search)="onSearch($event)"></app-auto-complete>
+    }
+}
+<app-field-error-message [control]="_control" [label]="label"></app-field-error-message>
+

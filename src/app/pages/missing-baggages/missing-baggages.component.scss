@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+
+  .confirmation-message {
+    color: rgb(11, 186, 128);
+    font-size: 2rem;
+  }
+
+  @media (max-width: 767px) {
+    .confirmation-message {
+      font-size: 1rem;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<form [formGroup]="form" class="form">
+    <section class="d-flex flex-row flex-wrap">
+        <app-field-control type="date" class="m-x-1" [control]="date" label="Date"></app-field-control>
+       
+        <div class="m-x-1 d-flex flex-row">
+            <app-field-control [control]="origin" label="Origin" [list]="originAirports" type="autocomplete" (search)="findOriginAirports($event)"></app-field-control>
+            <app-field-control [control]="destination" label="Destination" [list]="destinationAirports" type="autocomplete" (search)="findDestinationAirports($event)"></app-field-control>
+        </div>
+       
+        <app-field-control class="m-x-1" type="text" [control]="code" label="Code"></app-field-control>
+      
+        <app-field-control class="m-x-1 w-10 baggages-count" type="number" [control]="baggagesCount" label="Baggages Count"></app-field-control>
+      
+        <button mat-icon-button (click)="addBaggageContentAndQuantity()" type="button" title="Add baggages content and quantity">
+            <mat-icon>add</mat-icon>
+        </button>
+    </section>
+    @if(!!bagsContents.controls.length) {
+        <app-baggages-count [bagsContents]="bagsContents" (removeContent)="removeBaggageContentAndQuantity($event)"></app-baggages-count>
+    }
+</form>
+
+<section class="row d-flex justify-content-center">
+    <button data-test="submit" mat-raised-button (click)="submit()">Submit</button>
+</section>

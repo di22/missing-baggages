@@ -1,0 +1,1 @@
+export type FieldTypes = 'text' | 'number' | 'date' | 'autocomplete';

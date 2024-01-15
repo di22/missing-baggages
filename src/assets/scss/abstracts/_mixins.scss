@@ -1,0 +1,51 @@
+@mixin clearfix {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin absCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/*
+brwakpoint argument choices :
+-phone
+-tap-port
+-tap-land
+-big-disktop
+
+1em = 16px
+ */
+@mixin respond($breakpoint){
+@if($breakpoint == phone){
+    @media (max-width: 37.5em) {
+        @content
+
+    }
+}
+    @else if($breakpoint == tap-port){
+    @media (max-width: 56.25em) {
+        @content
+
+    }
+}
+    @else if($breakpoint == tap-land){
+    @media (max-width: 75em) {
+        @content
+
+    }
+}
+    @else if($breakpoint == big-disktop) {
+    @media (min-width: 112.5em) {
+        @content
+
+    }
+}
+}

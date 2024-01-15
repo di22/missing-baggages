@@ -1,0 +1,13 @@
+<mat-form-field [appearance]="'outline'" class="w-100">
+    <mat-label>{{label}}</mat-label>
+    <input type="text"
+           [placeholder]="placeholder"
+           matInput
+           [formControl]="_control"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      @for (option of (list | async); track option) {
+        <mat-option [value]="option" (onSelectionChange)="onSelect(option)">{{option}}</mat-option>
+      }
+    </mat-autocomplete>
+  </mat-form-field>

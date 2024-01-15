@@ -1,0 +1,11 @@
+<app-missing-baggages-form (addContents)="submit($event)"></app-missing-baggages-form>
+
+@if(list.length) {
+    <strong data-testid="confirmation-message" class="mt-1 confirmation-message">Thanks for your report, We will let you know ASAP</strong>
+}
+
+<app-grid-client-side class="mt-1" [columns]="columns" [dataSource]="list"></app-grid-client-side>
+
+<section class="row d-flex justify-content-end align-items-center mt-1 w-100">
+    <strong class="fs-3" data-testid="price">{{price()}}</strong><mat-icon>euro_symbol</mat-icon>
+</section>

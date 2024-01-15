@@ -1,0 +1,13 @@
+:host {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 2rem;
+    justify-content: center;
+
+    @media (max-width: 767px) {
+      .baggages-count {
+        width: 100%;
+      }
+    }
+}
+
+
