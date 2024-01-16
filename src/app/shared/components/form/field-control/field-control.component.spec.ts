@@ -2,10 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FieldControlComponent } from './field-control.component';
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FieldTypes } from '../form.config';
+import { FieldErrorMessageComponent } from './field-error-message/field-error-message.component';
 
 @Component({
   selector: 'app-test-coltrol-field',
@@ -17,7 +18,7 @@ import { FieldTypes } from '../form.config';
   imports: [FieldControlComponent]
 })
 export class TestFieldControlComponent {
-control: FormControl = new FormControl('');
+control: FormControl = new FormControl('', Validators.required);
 lable: string = 'Test';
 type: FieldTypes = 'autocomplete';
 }
@@ -40,6 +41,16 @@ describe('FieldControlComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should not show errors', () => {
+    const fieldComponent = fixture.debugElement.query(By.directive(FieldControlComponent));
+    const errorComponentRef = fieldComponent.nativeElement.querySelector('app-field-error-message');
+    expect(errorComponentRef).toBeTruthy();
+
+    const errorComponent = fieldComponent.query(By.directive(FieldErrorMessageComponent));
+    const error = errorComponent.nativeElement.querySelectorAll('mat-error');
+    expect(error.length).toEqual(0);
   });
 
   it('should render autocomplete', () => {
@@ -110,5 +121,53 @@ describe('FieldControlComponent', () => {
 
     expect(component.control).toBeTruthy();
     expect(component.lable).toEqual(fieldComponent.componentInstance.label);
+  });
+
+  it('should render nothing', () => {
+    component.type = 'test' as any;
+    fixture.detectChanges();
+    const fieldComponent = fixture.debugElement.query(By.directive(FieldControlComponent));
+    const autocompleteField = fieldComponent.nativeElement.querySelector('app-auto-complete');
+    const inputField = fieldComponent.nativeElement.querySelector('app-input-control');
+    const numberField = fieldComponent.nativeElement.querySelector('app-number-control');
+    const dateField = fieldComponent.nativeElement.querySelector('app-date-control');
+
+    expect(autocompleteField).toBeFalsy();
+    expect(inputField).toBeFalsy();
+    expect(numberField).toBeFalsy();
+    expect(dateField).toBeFalsy();
+
+    expect(component.control).toBeTruthy();
+    expect(component.lable).toEqual(fieldComponent.componentInstance.label);
+  });
+
+  it('should render nothing', () => {
+    component.type = 'test' as any;
+    fixture.detectChanges();
+    const fieldComponent = fixture.debugElement.query(By.directive(FieldControlComponent));
+    const autocompleteField = fieldComponent.nativeElement.querySelector('app-auto-complete');
+    const inputField = fieldComponent.nativeElement.querySelector('app-input-control');
+    const numberField = fieldComponent.nativeElement.querySelector('app-number-control');
+    const dateField = fieldComponent.nativeElement.querySelector('app-date-control');
+
+    expect(autocompleteField).toBeFalsy();
+    expect(inputField).toBeFalsy();
+    expect(numberField).toBeFalsy();
+    expect(dateField).toBeFalsy();
+
+    expect(component.control).toBeTruthy();
+    expect(component.lable).toEqual(fieldComponent.componentInstance.label);
+  });
+
+  it('should show required error', () => {
+    component.control.markAsTouched();
+    fixture.detectChanges();
+    const fieldComponent = fixture.debugElement.query(By.directive(FieldControlComponent));
+    const errorComponentRef = fieldComponent.nativeElement.querySelector('app-field-error-message');
+    expect(errorComponentRef).toBeTruthy();
+
+    const errorComponent = fieldComponent.query(By.directive(FieldErrorMessageComponent));
+    const error = errorComponent.nativeElement.querySelectorAll('mat-error');
+    expect(error.length).toEqual(1);
   });
 });
