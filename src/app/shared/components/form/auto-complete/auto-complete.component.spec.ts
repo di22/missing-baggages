@@ -62,8 +62,8 @@ describe('AutoCompleteComponent', () => {
     const input = fieldComponent.query(By.css('input[id="test"]'));
     fetchValue(input, 'a');
     await fixture.whenStable();
-    const matOriginOptions = document.querySelectorAll('mat-option') as NodeListOf<HTMLElement>;
-    expect(matOriginOptions.length).toEqual(2);
+    const matOptions = document.querySelectorAll('mat-option') as NodeListOf<HTMLElement>;
+    expect(matOptions.length).toEqual(2);
   });
 
   it('should emit the selected value', async() => {
@@ -73,11 +73,12 @@ describe('AutoCompleteComponent', () => {
     fetchValue(input, 'a');
     await fixture.whenStable();
     fixture.detectChanges();
-    const matOriginOptions = document.querySelectorAll('mat-option') as NodeListOf<HTMLElement>;
-    expect(matOriginOptions.length).toEqual(2);
-    matOriginOptions[0].click();
+    const matOptions = document.querySelectorAll('mat-option') as NodeListOf<HTMLElement>;
+    expect(matOptions.length).toEqual(2);
+    matOptions[0].click();
     await fixture.whenStable();
     expect(component.onSearch).toHaveBeenCalledWith(component.list[0]);
     expect(component.typedValue).toEqual(component.list[0]);
+    expect(component.control.value).toEqual(component.list[0]);
   });
 });
