@@ -20,7 +20,7 @@ export class BaseControlComponent {
     @Input() customCSSClasses: string;
     @Input() id: string;
     @Input() error: string;
-    @Input() list: Observable<string[]>;
+    @Input() list: string[];
     @Output() search: EventEmitter<string> = new EventEmitter<string>();
     _control: FormControl = new FormControl('');
 }

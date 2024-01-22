@@ -1,19 +1,18 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { FieldControlComponent } from "../../../shared/components/form/field-control/field-control.component";
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { BaggageContentGroupItem, LostBaggageFormValue } from '../typed-forms';
 import { MaterialModule } from '../../../shared/external-modules/material-module';
 import { BaggagesCountComponent } from "./baggages-count/baggages-count.component";
 import { FormHelperService } from '../../../shared/components/form/form-helper.service';
-import { AirportService } from '../../../domain/country/airport.service';
+import { AirportsListComponent } from "./airports-list/airports-list.component";
 
 @Component({
     selector: 'app-missing-baggages-form',
     standalone: true,
     templateUrl: './missing-baggages-form.component.html',
     styleUrl: './missing-baggages-form.component.scss',
-    imports: [MaterialModule, ReactiveFormsModule, FieldControlComponent, BaggagesCountComponent]
+    imports: [MaterialModule, ReactiveFormsModule, FieldControlComponent, BaggagesCountComponent, AirportsListComponent]
 })
 export class MissingBaggagesFormComponent {
     @Output() addContents: EventEmitter<LostBaggageFormValue> = new EventEmitter();
@@ -25,10 +24,10 @@ export class MissingBaggagesFormComponent {
     baggagesCount: FormControl<number>;
     bagsContents: FormArray<FormGroup<BaggageContentGroupItem>>;
   
-    originAirports: Observable<string[]>;
-    destinationAirports: Observable<string[]>;
+    originAirports: string[];
+    destinationAirports: string[];
   
-    constructor(private formBuilder: FormBuilder, private formHelperService: FormHelperService, private airportService: AirportService) {}
+    constructor(private formBuilder: FormBuilder, private formHelperService: FormHelperService) {}
     
     ngOnInit(): void {
       this.initForm();
@@ -50,14 +49,6 @@ export class MissingBaggagesFormComponent {
       this.code = <FormControl<string>>this.form.get('code');
       this.baggagesCount = <FormControl<number>>this.form.get('baggagesCount');
       this.bagsContents = <FormArray>this.form.get('bagsContents');
-    }
-  
-    findOriginAirports(name: string): void {
-      this.originAirports = this.airportService.getAirport(name);
-    }
-  
-    findDestinationAirports(name: string): void {
-      this.destinationAirports = this.airportService.getAirport(name);
     }
   
     addBaggageContentAndQuantity(): void {

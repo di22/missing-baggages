@@ -7,7 +7,7 @@
            [matAutocomplete]="auto"
            [id]="id">
     <mat-autocomplete #auto="matAutocomplete">
-      @for (option of (list | async); track option) {
+      @for (option of list; track option) {
         <mat-option [value]="option" (onSelectionChange)="onSelect(option)">{{option}}</mat-option>
       }
     </mat-autocomplete>

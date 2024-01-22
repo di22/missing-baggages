@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MissingBaggagesFormComponent } from './missing-baggages-form.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AirportService } from '../../../domain/country/airport.service';
+import { AirportService } from '../../../domain/airport/airport.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormHelperService } from '../../../shared/components/form/form-helper.service';
 import { By } from '@angular/platform-browser';
@@ -66,22 +66,6 @@ describe('MissingBaggagesFormComponent', () => {
     expect(component.submit).toHaveBeenCalled();
     expect(formHelperService.validateAllFormFields).toHaveBeenCalled();
     expect(errorMessages.length).toBe(4);
-  });
-
-  it('should call airport api', async() => {
-    jest.spyOn(airportService, 'getAirport').mockReturnValue(of(['Amsterdam airport', 'Cairo airport']));
-    jest.spyOn(component, 'findOriginAirports');
-
-    const inputAutocompleteElement = fixture.debugElement.query(By.css('input[id="origin"]'));
-    fetchValue(inputAutocompleteElement, 'a');
-    
-    await fixture.whenStable();
-    fixture.detectChanges();
-
-    const matOptions = document.querySelectorAll('mat-option');
-    expect(matOptions.length).toBe(2);
-    expect(component.findOriginAirports).toHaveBeenCalled();
-    expect(airportService.getAirport).toHaveBeenCalled();
   });
 
   it('should add content details inputs', () => {

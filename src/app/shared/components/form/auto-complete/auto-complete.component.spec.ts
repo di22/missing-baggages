@@ -4,7 +4,6 @@ import { AutoCompleteComponent } from './auto-complete.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { Observable, of } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { fetchValue } from '../../../../utils/unit-test.util';
 import { DOCUMENT } from '@angular/common';
@@ -13,7 +12,7 @@ import { DOCUMENT } from '@angular/common';
     selector: 'app-test-autocomplete',
     standalone: true,
     template: `
-   <app-auto-complete [control]="control" [label]="label" [list]="list$" [id]="id" (search)="onSearch($event)"></app-auto-complete>
+   <app-auto-complete [control]="control" [label]="label" [list]="list" [id]="id" (search)="onSearch($event)"></app-auto-complete>
 
   `,
     imports: [AutoCompleteComponent]
@@ -23,7 +22,6 @@ control: FormControl = new FormControl('', Validators.required);
 id: string = 'test';
 label: string = 'Test';
 list: string[] = ['Amsterdam airport', 'Cairo airport'];
-list$: Observable<string[]> = of(this.list);
 typedValue: string;
 
 onSearch(value: string): void {

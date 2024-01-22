@@ -1,4 +1,4 @@
-import { Component, WritableSignal, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, WritableSignal, signal } from '@angular/core';
 import { MissingBaggagesFormComponent } from "./missing-baggages-form/missing-baggages-form.component";
 import { GridClientSideComponent } from "../../shared/components/grid/grid-client-side/grid-client-side.component";
 import { LostBaggageFormValue } from './typed-forms';
@@ -11,7 +11,8 @@ import { GridColumn } from '../../shared/components/grid/table-config';
     standalone: true,
     templateUrl: './missing-baggages.component.html',
     styleUrl: './missing-baggages.component.scss',
-    imports: [MaterialModule, MissingBaggagesFormComponent, GridClientSideComponent]
+    imports: [MaterialModule, MissingBaggagesFormComponent, GridClientSideComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MissingBaggagesComponent {
   list: LostBaggage[] = [];
@@ -28,11 +29,11 @@ export class MissingBaggagesComponent {
       price: WritableSignal<number> = signal(0);
       
   submit(value: LostBaggageFormValue): void {
-    this.structItemsList(value);
+    this.list = this.structItemsList(value);
     this.updateItemsPrice();
   }
 
-  structItemsList(value: LostBaggageFormValue): void {
+  structItemsList(value: LostBaggageFormValue): LostBaggage[] {
     const contents = value.bagsContents;
     let itemsList: LostBaggage[] = [];
     if(contents?.length) {
@@ -54,7 +55,7 @@ export class MissingBaggagesComponent {
       }]
     }
 
-    this.list = [...this.list, ...itemsList];
+    return [...this.list, ...itemsList];
   }
 
   updateItemsPrice(): void {

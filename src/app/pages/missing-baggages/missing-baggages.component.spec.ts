@@ -4,7 +4,7 @@ import { MissingBaggagesComponent } from './missing-baggages.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MissingBaggagesFormComponent } from './missing-baggages-form/missing-baggages-form.component';
 import { GridClientSideComponent } from '../../shared/components/grid/grid-client-side/grid-client-side.component';
-import { AirportService } from '../../domain/country/airport.service';
+import { AirportService } from '../../domain/airport/airport.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';

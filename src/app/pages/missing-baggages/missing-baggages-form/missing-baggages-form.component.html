@@ -3,8 +3,8 @@
         <app-field-control type="date" id="date" class="m-x-1" [control]="date" label="Date"></app-field-control>
        
         <div class="m-x-1 d-flex flex-row">
-            <app-field-control [control]="origin" id="origin" label="Origin" [list]="originAirports" type="autocomplete" (search)="findOriginAirports($event)"></app-field-control>
-            <app-field-control [control]="destination" id="destination" label="Destination" [list]="destinationAirports" type="autocomplete" (search)="findDestinationAirports($event)"></app-field-control>
+            <app-airports-list [control]="origin" id="origin" label="Origin"></app-airports-list>
+            <app-airports-list [control]="destination" id="destination" label="Destination"></app-airports-list>
         </div>
        
         <app-field-control class="m-x-1" type="text" id="code" [control]="code" label="Code"></app-field-control>

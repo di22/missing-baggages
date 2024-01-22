@@ -7,7 +7,7 @@ import { Airport } from './models';
   providedIn: 'root'
 })
 export class AirportService {
-  countriesUrl: string = 'https://api.api-ninjas.com/v1/airports';
+  airportsUrl: string = 'https://api.api-ninjas.com/v1/airports';
  
   constructor(private http: HttpClient) { }
 
@@ -18,6 +18,6 @@ export class AirportService {
     const headers = {
       'X-Api-Key': 'o3gmMiH5TAW237sejxStWQ==CVPSJhmb9HNJ2JiF'
   };
-    return this.http.get<Airport[]>(`${this.countriesUrl}?name=${name}`, {headers, params}).pipe(map(airport => airport.map(e => e.name)));
+    return this.http.get<Airport[]>(`${this.airportsUrl}?name=${name}`, {headers, params}).pipe(map(airport => airport.map(e => e.name)));
   }
 }
