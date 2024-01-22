@@ -16,7 +16,7 @@ test.describe('missing baggage page', () => {
   test('should view form error messages with invalid form', async ({page}) => {
     await page.goto('http://localhost:4200');
 
-    await page.locator('[data-test="submit"]').click();
+    await page.locator('[data-testid="submit"]').click();
 
     const confirmation = page.getByTestId('confirmation-message');
     console.log(confirmation)
@@ -33,7 +33,7 @@ test.describe('missing baggage page', () => {
     await page.locator('input').nth(2).fill('Airport2');
     await page.locator('input').nth(4).fill('2');
 
-    await page.locator('[data-test="submit"]').click();
+    await page.locator('[data-testid="submit"]').click();
 
     await expect(page.getByTestId('confirmation-message')).toBeVisible();
   });
